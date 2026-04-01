@@ -21,11 +21,14 @@ func main() {
 	SampleIn := string(fetch)
 
 	SampleIn = helper.Upper(SampleIn)
+	SampleIn = helper.ToLower(SampleIn)
 	SampleIn = helper.FixAToAn(SampleIn)
 	SampleIn = helper.ConvertNumbers(SampleIn)
 	SampleIn = helper.ToCap(SampleIn)
 	SampleIn = helper.BinTodecimal(SampleIn)
-	
+	SampleIn = helper.FixPunct(SampleIn)
+	SampleIn = helper.FixSingleQuotes(SampleIn)
+	// SampleIn = helper.FixQuotes(SampleIn)
 
 	err := os.WriteFile(outputFile, []byte(SampleIn+"\n"), 0644)
 	if err != nil {
