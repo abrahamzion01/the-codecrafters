@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"helper/helper"
+	"os"
+)
+
+func main() {
+	args := (os.Args)
+	if len(args) != 3 {
+		fmt.Println("Insufficient Commands")
+		return
+	}
+
+	inputFile := os.Args[1]
+	outputFile := os.Args[2]
+
+	fetch, _ := os.ReadFile(inputFile)
+
+	SampleIn := string(fetch)
+
+	SampleIn = helper.Upper(SampleIn)
+	SampleIn = helper.FixArticle(SampleIn)
+
+	err := os.WriteFile(outputFile, []byte(SampleIn+"\n"), 0644)
+	if err != nil {
+		fmt.Println("error writing file")
+		return
+	}
+
+	fmt.Println("Text tranformed succesfully")
+	fmt.Println("Check your output manually or (cat output.txt)")
+
+}
