@@ -5,39 +5,65 @@ import (
 	"strings"
 )
 
-func Upper(s string) string {
-	ssplit := strings.Fields(s)
-	for i := 0; i < len(ssplit); i++ {
-		if strings.HasPrefix(ssplit[i], "(up") {
+func Upper(str string) string {
+	words := strings.Fields(str)
 
-			cleanedi := strings.Trim(ssplit[i], "()")
-			sepi := strings.Split(cleanedi, ",")
-
-			count := 1
-
-			if len(sepi) > 1 {
-				num, err := strconv.Atoi(strings.TrimSpace(sepi[1]))
-				if err == nil {
-					count = num
-				}
+	for i := 0; i < len(words); i++ {
+		if words[i] == "(up)" {
+			words[i-1] = strings.ToUpper(words[i-1])
+			words = append(words[:i], words[i+1:]...)
+			i++
+		} else if strings.HasPrefix(words[i], "(up") {
+			words[i+1] = strings.TrimSuffix(words[i+1], ")")
+			n, err := strconv.Atoi(words[i+1])
+			if err != nil {
+				continue
 			}
-			for j := 1; j <= count; j++ {
-				if i-j < 0 {
-
-					break
-				}
-				ssplit[i-j] = strings.TrimSpace(ssplit[i-j])
-
-				ssplit[i-j] = strings.ToUpper(ssplit[i-j])
-
+			for j := 1; j <= n && i-j >= 0; j++ {
+				words[i-j] = strings.ToUpper(words[i-j])
 			}
-			ssplit = append(ssplit[:i], ssplit[i+1:]...)
-			i--
+			words = append(words[:i], words[i+2:]...)
+			i++
 		}
+
 	}
-	result := strings.Join(ssplit, " ")
-	return result
+
+	return strings.Join(words, " ")
 }
+
+// func Upper(s string) string {
+// 	ssplit := strings.Fields(s)
+// 	for i := 0; i < len(ssplit); i++ {
+// 		if strings.HasPrefix(ssplit[i], "(up") {
+
+// 			cleanedi := strings.Trim(ssplit[i], "()")
+// 			sepi := strings.Split(cleanedi, ",")
+
+// 			count := 1
+
+// 			if len(sepi) > 1 {
+// 				num, err := strconv.Atoi(strings.TrimSpace(sepi[1]))
+// 				if err == nil {
+// 					count = num
+// 				}
+// 			}
+// 			for j := 1; j <= count; j++ {
+// 				if i-j < 0 {
+
+// 					break
+// 				}
+// 				ssplit[i-j] = strings.TrimSpace(ssplit[i-j])
+
+// 				ssplit[i-j] = strings.ToUpper(ssplit[i-j])
+
+// 			}
+// 			ssplit = append(ssplit[:i], ssplit[i+1:]...)
+// 			i--
+// 		}
+// 	}
+// 	result := strings.Join(ssplit, " ")
+// 	return result
+// }
 
 // func FixArticle(s string) string {
 
