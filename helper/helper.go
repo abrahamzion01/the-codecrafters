@@ -127,12 +127,51 @@ func FixAToAn(text string) string {
 }
 
 // Benedict Onyeke(bonyeke)
-func FixSingleQuotes(text string) string {
-	text = strings.Trim(text, "'")
+// func FixSingleQuotes(text string) string {
+// 	text = strings.Trim(text, "'")
 
-	text = strings.TrimSpace(text)
+// 	text = strings.TrimSpace(text)
 
-	return "'" + text + "'"
+// 	return "'" + text + "'"
+// }
+// Code From Roland Elaigwu(relaigwu)
+
+func FixQuotes(s string) string {
+	r := []rune(s)
+	var res []rune
+	inQuote := false
+
+	for i := 0; i < len(r); i++ {
+
+		if r[i] == '\'' {
+
+			if !inQuote {
+				if len(res) > 0 && res[len(res)-1] != ' ' {
+					res = append(res, ' ')
+				}
+				res = append(res, '\'')
+				inQuote = true
+
+				i++
+				for i < len(r) && r[i] == ' ' {
+					i++
+				}
+				i--
+
+			} else {
+				if len(res) > 0 && res[len(res)-1] == ' ' {
+					res = res[:len(res)-1]
+				}
+				res = append(res, '\'')
+				inQuote = false
+			}
+			continue
+		}
+
+		res = append(res, r[i])
+	}
+
+	return string(res)
 }
 
 // Code from Excel
