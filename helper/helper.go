@@ -98,4 +98,12 @@ func fixAToAn(text string) string {
 	return strings.Join(words, " ")
 }
 
-P
+
+// Benedict Onyeke(bonyeke)
+func FixSingleQuotes(text string) string {
+	text = strings.Trim(text, "'")
+
+	text = strings.TrimSpace(text)
+
+	return "'" + text + "'"
+}
