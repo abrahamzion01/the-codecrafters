@@ -23,7 +23,8 @@ func main() {
 	SampleIn = helper.Upper(SampleIn)
 	SampleIn = helper.FixAToAn(SampleIn)
 	SampleIn = helper.ConvertNumbers(SampleIn)
-
+	SampleIn = helper.ToCap(SampleIn)
+	
 	err := os.WriteFile(outputFile, []byte(SampleIn+"\n"), 0644)
 	if err != nil {
 		fmt.Println("error writing file")
