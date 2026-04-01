@@ -1,10 +1,10 @@
 package helper
 
 import (
+	"fmt"
+	"regexp"
 	"strconv"
 	"strings"
-	"regexp"
-	"fmt"
 )
 
 func Upper(str string) string {
@@ -159,14 +159,10 @@ func TransformText(s string) string {
 	return strings.Join(slice, " ")
 }
 
-
-
-
 // patrick christian
 
 func ConvertNumbers(s string) string {
 	reHex := regexp.MustCompile(`(-?[0-9A-Fa-f]+)\s*\(hex\)`)
-	
 
 	s = reHex.ReplaceAllStringFunc(s, func(m string) string {
 		parts := reHex.FindStringSubmatch(m)
@@ -182,9 +178,7 @@ func ConvertNumbers(s string) string {
 	return s
 }
 
-
 // David Ayuba
-
 
 func ToCap(dswayy string) string {
 	s := strings.Fields(dswayy)
@@ -192,7 +186,7 @@ func ToCap(dswayy string) string {
 		if s[i] == "(cap)" {
 			s[i-1] = strings.Title(s[i-1])
 			s = append(s[:i], s[i+1:]...)
-		}else if strings.HasPrefix(s[i], "(cap") {
+		} else if strings.HasPrefix(s[i], "(cap") {
 			s[i+1] = strings.TrimSuffix(s[i+1], ")")
 			n, err := strconv.Atoi(s[i+1])
 			if err != nil {
@@ -207,4 +201,25 @@ func ToCap(dswayy string) string {
 	}
 
 	return strings.Join(s, " ")
+}
+
+// abraham zion
+
+func BinTodecimal(bin string) string {
+
+	words := strings.Fields(bin)
+	for i, j := range words {
+		if j == "(bin)" && i > 0 {
+			result, err := strconv.ParseInt(words[i-1], 2, 64)
+			if err != nil {
+				fmt.Println("Error")
+				continue
+			}
+			words[i-1] = strconv.Itoa(int(result))
+			words[i] = ""
+		}
+
+	}
+	return strings.TrimSpace(strings.Join(strings.Fields(strings.Join(words, " ")), " "))
+
 }

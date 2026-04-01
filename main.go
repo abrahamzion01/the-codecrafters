@@ -24,7 +24,8 @@ func main() {
 	SampleIn = helper.FixAToAn(SampleIn)
 	SampleIn = helper.ConvertNumbers(SampleIn)
 	SampleIn = helper.ToCap(SampleIn)
-	
+	SampleIn = helper.BinTodecimal(SampleIn)
+
 	err := os.WriteFile(outputFile, []byte(SampleIn+"\n"), 0644)
 	if err != nil {
 		fmt.Println("error writing file")
