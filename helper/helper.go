@@ -98,7 +98,6 @@ func fixAToAn(text string) string {
 	return strings.Join(words, " ")
 }
 
-
 // Benedict Onyeke(bonyeke)
 func FixSingleQuotes(text string) string {
 	text = strings.Trim(text, "'")
@@ -106,4 +105,28 @@ func FixSingleQuotes(text string) string {
 	text = strings.TrimSpace(text)
 
 	return "'" + text + "'"
+}
+
+// Code from Excel
+func TransformText(s string) string {
+	slice := strings.Fields(s)
+	for i := 0; i < len(slice); i++ {
+		if slice[i] == "(low)" {
+			slice[i-1] = strings.ToLower(slice[i-1])
+
+			slice = append(slice[:i], slice[i+1:]...)
+		} else if strings.HasPrefix(slice[i], "(low") {
+			slice[i+1] = strings.TrimSuffix(slice[i+1], ")")
+			n, err := strconv.Atoi(slice[i+1])
+			if err != nil {
+				continue
+			}
+			for j := 1; j <= n && i-j >= 0; j++ {
+				slice[i-j] = strings.ToLower(slice[i-j])
+			}
+			slice = append(slice[:i], slice[i+2:]...)
+			i--
+		}
+	}
+	return strings.Join(slice, " ")
 }
