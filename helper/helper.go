@@ -39,20 +39,63 @@ func Upper(s string) string {
 	return result
 }
 
-func FixArticle(s string) string {
+// func FixArticle(s string) string {
 
-	ssplit := strings.Fields(s)
-	vowels := "aeiouAEIOU"
-	for i := 1; i < len(ssplit); i++ {
-		if strings.ContainsAny(string(ssplit[i][0]), vowels) {
+// 	ssplit := strings.Fields(s)
+// 	vowels := "aeiouAEIOU"
+// 	for i := 1; i < len(ssplit); i++ {
+// 		if strings.ContainsAny(string(ssplit[i][0]), vowels) {
 
-			if string(ssplit[i-1]) == "a" {
-				ssplit[i-1] = "an"
+// 			if string(ssplit[i-1]) == "a" {
+// 				ssplit[i-1] = "an"
 
+// 			}
+// 		}
+
+// 	}
+// 	return strings.Join(ssplit, " ")
+
+// }
+
+func fixAToAn(text string) string {
+	words := strings.Fields(text)
+	consonantSound := []string{
+		"university", "unicorn", "use", "user", "unit", "euro", "one",
+	}
+	vowelSound := []string{
+		"hour", "honor", "heir", "honest",
+	}
+
+	for i, word := range words {
+		if word == "a" || word == "A" {
+			if i+1 < len(words) {
+				next := strings.ToLower(words[i+1])
+				first := next[0]
+				isVowelStart := strings.ContainsRune("aeiou", rune(first))
+				for _, cs := range consonantSound {
+					if strings.HasPrefix(next, cs) {
+						isVowelStart = false
+						break
+					}
+				}
+				for _, vs := range vowelSound {
+					if strings.HasPrefix(next, vs) {
+						isVowelStart = true
+						break
+					}
+				}
+				if isVowelStart {
+					if word == "a" {
+						words[i] = "an"
+					} else {
+						words[i] = "An"
+					}
+				}
 			}
 		}
-
 	}
-	return strings.Join(ssplit, " ")
 
+	return strings.Join(words, " ")
 }
+
+P
