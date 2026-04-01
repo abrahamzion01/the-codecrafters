@@ -21,7 +21,8 @@ func main() {
 	SampleIn := string(fetch)
 
 	SampleIn = helper.Upper(SampleIn)
-	SampleIn = helper.FixArticle(SampleIn)
+	SampleIn = helper.FixAToAn(SampleIn)
+	SampleIn = helper.ConvertNumbers(SampleIn)
 
 	err := os.WriteFile(outputFile, []byte(SampleIn+"\n"), 0644)
 	if err != nil {

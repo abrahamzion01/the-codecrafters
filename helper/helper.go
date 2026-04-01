@@ -3,6 +3,8 @@ package helper
 import (
 	"strconv"
 	"strings"
+	"regexp"
+	"fmt"
 )
 
 func Upper(str string) string {
@@ -83,7 +85,7 @@ func Upper(str string) string {
 
 // }
 
-func fixAToAn(text string) string {
+func FixAToAn(text string) string {
 	words := strings.Fields(text)
 	consonantSound := []string{
 		"university", "unicorn", "use", "user", "unit", "euro", "one",
@@ -155,4 +157,27 @@ func TransformText(s string) string {
 		}
 	}
 	return strings.Join(slice, " ")
+}
+
+
+
+
+// patrick christian
+
+func ConvertNumbers(s string) string {
+	reHex := regexp.MustCompile(`(-?[0-9A-Fa-f]+)\s*\(hex\)`)
+	
+
+	s = reHex.ReplaceAllStringFunc(s, func(m string) string {
+		parts := reHex.FindStringSubmatch(m)
+		if len(parts) < 2 {
+			return m
+		}
+		n, err := strconv.ParseInt(parts[1], 16, 64)
+		if err != nil {
+			return m
+		}
+		return fmt.Sprint(n)
+	})
+	return s
 }
