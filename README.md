@@ -280,7 +280,7 @@ fmt.Println(text) // an hour 10 Hello
   * Numeric conversions     | by abraham zion(zabraham) / christain patrick (cpatrick)
   * punctuation handling    | by victor ejike(vejike) /
   * main function           | by joel obiabo(jobiabo) / roland elaigwu(relaigwu)
-  * fix A to An             | by  Mekomcu (Melchizedek Ekondu)
+  * fix A to An             | by  Mekondu (Melchizedek Ekondu)
 
 ---
 
