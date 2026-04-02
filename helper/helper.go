@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// Christopher John
+// Contribution from Christopher John
 func Upper(str string) string {
 	words := strings.Fields(str)
 
@@ -33,7 +33,7 @@ func Upper(str string) string {
 
 	return strings.Join(words, " ")
 }
-
+// Contribution from (Mekondu) Melchizedek Ekondu
 func FixAToAn(text string) string {
 	words := strings.Fields(text)
 	consonantSound := []string{
@@ -75,7 +75,7 @@ func FixAToAn(text string) string {
 	return strings.Join(words, " ")
 }
 
-// Benedict Onyeke(bonyeke)
+// Contribution from Benedict Onyeke(bonyeke)
 func FixSingleQuotes(text string) string {
 	text = strings.Trim(text, "'")
 
@@ -84,7 +84,7 @@ func FixSingleQuotes(text string) string {
 	return "'" + text + "'"
 }
 
-// Code From Roland Elaigwu(relaigwu)
+// Contribution From Roland Elaigwu(relaigwu)
 
 // func FixQuotes(s string) string {
 // 	r := []rune(s)
@@ -124,7 +124,7 @@ func FixSingleQuotes(text string) string {
 // 	return string(res)
 // }
 
-// Code from Excel
+// Contribution from Excel
 func ToLower(s string) string {
 	slice := strings.Fields(s)
 	for i := 0; i < len(slice); i++ {
@@ -148,7 +148,7 @@ func ToLower(s string) string {
 	return strings.Join(slice, " ")
 }
 
-// patrick christian
+// Contribution from patrick christian
 
 func ConvertNumbers(s string) string {
 	reHex := regexp.MustCompile(`(-?[0-9A-Fa-f]+)\s*\(hex\)`)
@@ -167,7 +167,7 @@ func ConvertNumbers(s string) string {
 	return s
 }
 
-// David Ayuba
+// Contribution from David Ayuba
 
 func ToCap(dswayy string) string {
 	s := strings.Fields(dswayy)
@@ -192,7 +192,7 @@ func ToCap(dswayy string) string {
 	return strings.Join(s, " ")
 }
 
-// abraham zion
+// Contributionf from abraham zion
 
 func BinTodecimal(bin string) string {
 
